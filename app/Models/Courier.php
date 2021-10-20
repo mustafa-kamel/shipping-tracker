@@ -9,4 +9,9 @@ class Courier extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'address', 'number'];
+
+    public function shippings()
+    {
+        return $this->hasMany(App\Models\Shipping::class);
+    }
 }

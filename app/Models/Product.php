@@ -9,4 +9,9 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'image'];
+
+    public function shippings()
+    {
+        return $this->belongsToMany(App\Models\Shipping::class);
+    }
 }
