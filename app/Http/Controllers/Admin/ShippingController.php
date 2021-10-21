@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use App\Models\Shipping;
 use Illuminate\Support\Str;
+use App\Models\Shipping;
 
 
 class ShippingController extends Controller
@@ -80,6 +80,19 @@ class ShippingController extends Controller
     {
         $shipping = Shipping::where('shipment_number', $request->shipment_number)->firstOrFail();
         return view('admin.shippings.show', compact('shipping'));
+    }
+
+    /**
+     * Display a listing of the specified resources.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function delivered(Request $request)
+    {
+        if ($request->API_KEY !== env('API_KEY', 'WUMMUxgu52a67aBv6iN2iz8SikJeyPyESMuYtz0smzX3Mij5Ym'))
+            abort(403, 'Not authorized.');
+        $shippings = Shipping::where('status', 'delivered')->get();
+        return response()->json($shippings);
     }
 
     /**
