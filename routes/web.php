@@ -13,11 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+require __DIR__ . '/auth.php';
+
+Route::get('/', function () {
+    return view('admin.dashboard');
+})->name('home');
+
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__ . '/auth.php';
-
-Route::resource('admin/products', 'App\Http\Controllers\Admin\ProductsController')->middleware(['auth']);
-Route::resource('admin/couriers', 'App\Http\Controllers\Admin\CouriersController')->middleware(['auth']);
+Route::resource('admin/products', 'App\Http\Controllers\Admin\ProductController')->middleware(['auth']);
+Route::resource('admin/couriers', 'App\Http\Controllers\Admin\CourierController')->middleware(['auth']);

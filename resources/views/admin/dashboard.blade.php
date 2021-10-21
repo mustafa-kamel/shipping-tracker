@@ -8,6 +8,8 @@
             <div class="card">
                 <div class="card-header">Dashboard</div>
                 <div class="card-body">
+                    <h2>Welcome to shipping tracker</h2>
+                    @auth
                     <ul class="nav nav-pills nav-fill">
                         <li class="nav-item mx-3">
                             <a class="nav-link active" aria-current="page"
@@ -22,6 +24,7 @@
                                 href="{{ route('shippings.index') }}">Shippings</a>
                         </li>
                     </ul>
+                    @endauth
                 </div>
             </div>
         </div>
