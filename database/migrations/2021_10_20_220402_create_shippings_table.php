@@ -18,6 +18,7 @@ class CreateShippingsTable extends Migration
             $table->text('description');
             $table->string('shipment_number', 16)->unique();
             $table->enum('status', array_keys(config('enums.ship_status_enum')))->default(array_keys(config('enums.ship_status_enum'))[0]);
+            $table->string('address');
             $table->unsignedBigInteger('courier_id');
             $table->foreign('courier_id')->references('id')->on('couriers')->onDelete('CASCADE');
             $table->timestamps();

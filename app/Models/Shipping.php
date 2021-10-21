@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Shipping extends Model
 {
     use HasFactory;
-    protected $fillable = ['description', 'shipment_number', 'status'];
+    protected $fillable = ['description', 'shipment_number', 'status', 'address'];
 
     public function courier()
     {
-        return $this->belongsTo(App\Models\Courier::class);
+        return $this->belongsTo(Courier::class);
     }
 
     public function products()
     {
-        return $this->belongsToMany(App\Models\Product::class);
+        return $this->belongsToMany(Product::class);
     }
 }
