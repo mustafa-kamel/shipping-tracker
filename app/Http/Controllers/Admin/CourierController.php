@@ -17,7 +17,6 @@ class CourierController extends Controller
     {
         $keyword = $request->get('search');
         $perPage = 10;
-
         if (!empty($keyword)) {
             $couriers = Courier::where('name', 'LIKE', "%$keyword%")
                 ->orWhere('address', 'LIKE', "%$keyword%")
@@ -26,7 +25,6 @@ class CourierController extends Controller
         } else {
             $couriers = Courier::latest()->paginate($perPage);
         }
-
         return view('admin.couriers.index', compact('couriers'));
     }
 
@@ -61,7 +59,7 @@ class CourierController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Courier $courier
+     * @param  App\Models\Courier $courier
      *
      * @return \Illuminate\View\View
      */
@@ -73,7 +71,7 @@ class CourierController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Courier $courier
+     * @param  App\Models\Courier $courier
      *
      * @return \Illuminate\View\View
      */
@@ -86,7 +84,7 @@ class CourierController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param  Courier $courier
+     * @param  App\Models\Courier $courier
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -104,14 +102,13 @@ class CourierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Courier  $courier
+     * @param  App\Models\Courier  $courier
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Courier $courier)
     {
         $courier->delete();
-
         return redirect('admin/couriers')->with('success', 'Courier deleted!');
     }
 }
