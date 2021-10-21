@@ -12,6 +12,6 @@ class Courier extends Model
 
     public function shippings()
     {
-        return $this->hasMany(App\Models\Shipping::class);
+        return $this->hasMany(Shipping::class);
     }
 }

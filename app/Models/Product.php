@@ -12,6 +12,6 @@ class Product extends Model
 
     public function shippings()
     {
-        return $this->belongsToMany(App\Models\Shipping::class);
+        return $this->belongsToMany(Shipping::class);
     }
 }
