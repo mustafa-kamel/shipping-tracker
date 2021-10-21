@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Models\Shipping;
+use Illuminate\Support\Str;
+
 
 class ShippingController extends Controller
 {
@@ -17,18 +20,15 @@ class ShippingController extends Controller
     {
         $keyword = $request->get('search');
         $perPage = 10;
-
         if (!empty($keyword)) {
             $shippings = Shipping::where('description', 'LIKE', "%$keyword%")
                 ->orWhere('shipment_number', 'LIKE', "%$keyword%")
                 ->orWhere('address', 'LIKE', "%$keyword%")
-                ->orWhere('courier_id', 'LIKE', "%$keyword%")
                 ->orWhere('status', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
             $shippings = Shipping::latest()->paginate($perPage);
         }
-
         return view('admin.shippings.index', compact('shippings'));
     }
 
@@ -52,43 +52,46 @@ class ShippingController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'shipment_number' => 'required|unique|min:10|max:10',
-            'description' => 'text',
-            'address' => 'string',
-            'courier_id' => 'exists:couriers,id'
+            'shipment_number' => 'nullable|min:10|max:10|unique:shippings,shipment_number',
+            'description' => 'required|string|max:1000',
+            'status' => [
+                'required',
+                'string',
+                Rule::in(array_keys(config('enums.ship_status_enum')))
+            ],
+            'address' => 'required|string|max:255',
+            'courier_id' => 'required|exists:App\Models\courier,id',
+            'products' => 'nullable|array'
         ]);
-        $requestData = $request->all();
-
-        Shipping::create($requestData);
-
-        return redirect('admin/shippings')->with('flash_message', 'Shipping added!');
+        if (is_null($request->shipment_number)) {
+            $request->merge(['shipment_number' => Str::random(10)]);
+        }
+        $shipping = Shipping::create($request->all());
+        $shipping->products()->sync($request->products);
+        return redirect()->route('shippings.index')->with('success', 'Shipping added!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  App\Models\Shipping $shipping
      *
      * @return \Illuminate\View\View
      */
-    public function show($id)
+    public function show(Shipping $shipping)
     {
-        $shipping = Shipping::findOrFail($id);
-
         return view('admin.shippings.show', compact('shipping'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  App\Models\Shipping $shipping
      *
      * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Shipping $shipping)
     {
-        $shipping = Shipping::findOrFail($id);
-
         return view('admin.shippings.edit', compact('shipping'));
     }
 
@@ -96,37 +99,44 @@ class ShippingController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param  int  $id
+     * @param  App\Models\Shipping $shipping
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Shipping $shipping)
     {
         $this->validate($request, [
-            'shipment_number' => 'required|unique|min:10|max:10',
-            'description' => 'text',
-            'address' => 'string',
-            'courier_id' => 'exists:couriers,id'
+            'shipment_number' => [
+                'required',
+                'min:10',
+                'max:10',
+                Rule::unique('shippings')->ignore($shipping->id)
+            ],
+            'description' => 'required|string|max:1000',
+            'status' => [
+                'required',
+                'string',
+                Rule::in(array_keys(config('enums.ship_status_enum')))
+            ],
+            'address' => 'required|string|max:255',
+            'courier_id' => 'exists:App\Models\courier,id',
+            'products' => 'nullable|array'
         ]);
-        $requestData = $request->all();
-
-        $shipping = Shipping::findOrFail($id);
-        $shipping->update($requestData);
-
-        return redirect('admin/shippings')->with('flash_message', 'Shipping updated!');
+        $shipping->update($request->all());
+        $shipping->products()->sync($request->products);
+        return redirect()->route('shippings.index')->with('success', 'Shipping updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  App\Models\Shipping $shipping
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy($id)
+    public function destroy(Shipping $shipping)
     {
-        Shipping::destroy($id);
-
-        return redirect('admin/shippings')->with('flash_message', 'Shipping deleted!');
+        $shipping->delete();
+        return redirect()->route('shippings.index')->with('success', 'Shipping deleted!');
     }
 }
