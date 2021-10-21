@@ -16,7 +16,7 @@ class CreateShippingsTable extends Migration
         Schema::create('shippings', function (Blueprint $table) {
             $table->id();
             $table->text('description');
-            $table->string('shipment_number', 16)->unique();
+            $table->string('shipment_number', 10)->unique();
             $table->enum('status', array_keys(config('enums.ship_status_enum')))->default(array_keys(config('enums.ship_status_enum'))[0]);
             $table->string('address');
             $table->unsignedBigInteger('courier_id');
