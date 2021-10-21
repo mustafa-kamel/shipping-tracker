@@ -20,7 +20,6 @@ class CreateProductShipping extends Migration
             $table->unsignedSmallInteger('count')->default(1);
             $table->foreign('product_id')->references('id')->on('products')->onDelete('CASCADE');
             $table->foreign('shipping_id')->references('id')->on('shippings')->onDelete('CASCADE');
-            $table->timestamps();
         });
     }
 
