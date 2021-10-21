@@ -13,7 +13,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        view()->composer('admin.shippings.form', function ($view) {
+            $view->with([
+                'couriers' => \App\Models\Courier::latest()->get(['id', 'name']),
+                'products' => \App\Models\Product::latest()->get(['id', 'name'])
+            ]);
+        });
     }
 
     /**
