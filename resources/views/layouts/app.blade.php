@@ -26,6 +26,7 @@
             <div class="max-w-7xl mx-auto mb-4 py-6 px-4 sm:px-6 lg:px-8">
                 <h2>{{ env("APP_NAME") }}</h2>
             </div>
+            @include('layouts.flash')
         </header>
 
         <!-- Page Content -->

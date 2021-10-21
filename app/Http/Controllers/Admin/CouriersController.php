@@ -55,7 +55,7 @@ class CouriersController extends Controller
             'number' => 'required|string'
         ]);
         Courier::create($request->all());
-        return redirect('admin/couriers')->with('flash_message', 'Courier added!');
+        return redirect('admin/couriers')->with('success', 'Courier added!');
     }
 
     /**
@@ -98,7 +98,7 @@ class CouriersController extends Controller
             'number' => 'required|string'
         ]);
         $courier->update($request->all());
-        return redirect('admin/couriers')->with('flash_message', 'Courier updated!');
+        return redirect('admin/couriers')->with('success', 'Courier updated!');
     }
 
     /**
@@ -112,6 +112,6 @@ class CouriersController extends Controller
     {
         $courier->delete();
 
-        return redirect('admin/couriers')->with('flash_message', 'Courier deleted!');
+        return redirect('admin/couriers')->with('success', 'Courier deleted!');
     }
 }
