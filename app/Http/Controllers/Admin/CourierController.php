@@ -48,12 +48,12 @@ class CourierController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
-            'address' => 'nullable|string',
-            'number' => 'required|string'
+            'name' => 'required|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'number' => 'required|string|max:255'
         ]);
         Courier::create($request->all());
-        return redirect('admin/couriers')->with('success', 'Courier added!');
+        return redirect()->route('couriers.index')->with('success', 'Courier added!');
     }
 
     /**
@@ -91,12 +91,12 @@ class CourierController extends Controller
     public function update(Request $request, Courier $courier)
     {
         $request->validate([
-            'name' => 'required|string',
-            'address' => 'nullable|string',
-            'number' => 'required|string'
+            'name' => 'required|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'number' => 'required|string|max:255'
         ]);
         $courier->update($request->all());
-        return redirect('admin/couriers')->with('success', 'Courier updated!');
+        return redirect()->route('couriers.index')->with('success', 'Courier updated!');
     }
 
     /**
@@ -109,6 +109,6 @@ class CourierController extends Controller
     public function destroy(Courier $courier)
     {
         $courier->delete();
-        return redirect('admin/couriers')->with('success', 'Courier deleted!');
+        return redirect()->route('couriers.index')->with('success', 'Courier deleted!');
     }
 }

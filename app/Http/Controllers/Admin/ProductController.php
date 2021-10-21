@@ -46,7 +46,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
+            'name' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096'
         ]);
         $imageName = NULL;
@@ -58,7 +58,7 @@ class ProductController extends Controller
             'name' => $request->name,
             'image' => ($imageName) ? "images/$imageName" : NULL
         ]);
-        return redirect('admin/products')->with('success', 'Product added!');
+        return redirect()->route('products.index')->with('success', 'Product added!');
     }
 
     /**
@@ -96,7 +96,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
-            'name' => 'required|string',
+            'name' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:4096'
         ]);
         $imageName = NULL;
@@ -111,7 +111,7 @@ class ProductController extends Controller
             'name' => $request->name,
             'image' => ($imageName) ? "images/$imageName" : $product->image
         ]);
-        return redirect('admin/products')->with('success', 'Product updated!');
+        return redirect()->route('products.index')->with('success', 'Product updated!');
     }
 
     /**
@@ -127,6 +127,6 @@ class ProductController extends Controller
             @unlink(public_path($product->image));
         }
         $product->delete();
-        return redirect('admin/products')->with('success', 'Product deleted!');
+        return redirect()->route('products.index')->with('success', 'Product deleted!');
     }
 }
