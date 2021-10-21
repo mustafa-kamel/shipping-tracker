@@ -13,6 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        \App\Models\User::factory(1)->create([
+            'name' => 'Mustafa kamel',
+            'email' => 'mostafak252@gmail.com',
+        ]);
+        \App\Models\Courier::factory(5)->has(
+            \App\Models\Shipping::factory()->hasAttached(
+                \App\Models\Product::factory(5),
+                ['count' => 3]
+            )
+        )->create();
     }
 }
