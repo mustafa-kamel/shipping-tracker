@@ -26,3 +26,4 @@ Route::get('/dashboard', function () {
 Route::resource('admin/products', 'App\Http\Controllers\Admin\ProductController')->middleware(['auth']);
 Route::resource('admin/couriers', 'App\Http\Controllers\Admin\CourierController')->middleware(['auth']);
 Route::resource('admin/shippings', 'App\Http\Controllers\Admin\ShippingController')->middleware(['auth']);
+Route::get('shippings/track', ['App\Http\Controllers\Admin\ShippingController', 'track'])->name('shippings.track');

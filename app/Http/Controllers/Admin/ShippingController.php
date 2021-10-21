@@ -74,6 +74,17 @@ class ShippingController extends Controller
     /**
      * Display the specified resource.
      *
+     * @return \Illuminate\View\View
+     */
+    public function track(Request $request)
+    {
+        $shipping = Shipping::where('shipment_number', $request->shipment_number)->firstOrFail();
+        return view('admin.shippings.show', compact('shipping'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
      * @param  App\Models\Shipping $shipping
      *
      * @return \Illuminate\View\View
