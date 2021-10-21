@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Shipping extends Model
 {
     use HasFactory;
-    protected $fillable = ['description', 'shipment_number', 'status', 'address'];
+    protected $fillable = ['description', 'shipment_number', 'status', 'address', 'courier_id'];
 
     public function courier()
     {
@@ -17,6 +17,6 @@ class Shipping extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class)->withPivot('count');
     }
 }
