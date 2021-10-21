@@ -19,4 +19,5 @@ Route::get('/dashboard', function () {
 
 require __DIR__ . '/auth.php';
 
+Route::resource('admin/products', 'App\Http\Controllers\Admin\ProductsController')->middleware(['auth']);
 Route::resource('admin/couriers', 'App\Http\Controllers\Admin\CouriersController')->middleware(['auth']);

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Courier;
 
-class CouriersController extends Controller
+class CourierController extends Controller
 {
     /**
      * Display a listing of the resource.

@@ -23,7 +23,7 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence(3),
-            'image' => $this->faker->image(null, 640, 480)
+            'image' => 'images/' . $this->faker->image(public_path('images'), 640, 480, 'technics', false)
         ];
     }
 }
