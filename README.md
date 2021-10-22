@@ -2,7 +2,7 @@
 
 ## About
 
-This is a basic laravel project that can be used for as a basic shipping tracking system
+This is a basic laravel project that can be used for a basic shipping tracking system
 
 
 ### It supports:
@@ -16,8 +16,8 @@ This is a basic laravel project that can be used for as a basic shipping trackin
  ### Prerequisites
 
  You should have stable verions of all these requirements
- - php > 7.1
- - mysql 8.0
+ - php >= 7.1
+ - mysql >= 8.0
  - composer 2.1
 
 
@@ -29,7 +29,7 @@ To get this app up and running follow the next steps
 ```bash
 cd shipping-tracker
 ```
-- Run the following command to get the app installled
+- Run the following command to get the dependencies installled
 ```bash
 composer update
 ```
@@ -39,7 +39,7 @@ copy .env.example .env
 ```
 
 - Create a mysql database and add its name and credentials to the `.env` file you just created in the app root directory or simply use the same name of the repo `shipping_tracker` and root as a username and password
-- After you have created a new database and added its credentials to the app config use run the app migrations
+- After you have created a new database and added its credentials to the app config run the app migrations
 ```bash
 php artisan migrate
 ```
