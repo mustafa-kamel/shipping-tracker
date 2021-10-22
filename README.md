@@ -61,12 +61,12 @@ Then you can access the app in your browser
 
 By default it can be accessed using this url [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-you track any shipment from the default page by its shipment number without login
+- you track any shipment from the default page by its shipment number without login
+- you can login as admin using the email in the `DatabaseSeeder.php` file `mostafak252@gmail.com` and `password` or - - you can add your own before you run the seed command or edit it and reseed the database again
 
-
-you can login as admin using the email in the `DatabaseSeeder.php` file `mostafak252@gmail.com` and `password` or you can add your own before you run the seed command or edit it and reseed the database again
 
 Once you login as admin you will be able to view, add, edit and delete any resource
+
 
 One more thing you can do is to list all the available delivered shipments and get the response as json by visiting this API: `api/delivered`
 if you try to do so you will get a `403 Unauthorized` response as it's secured by API_KEY, so you should use the API_KEY that's by default will be in the env file so you can add one to the `.env` file or simply use this one `api/delivered?API_KEY=WUMMUxgu52a67aBv6iN2iz8SikJeyPyESMuYtz0smzX3Mij5Ym`
