@@ -11,6 +11,7 @@ This is a basic laravel project that can be used for a basic shipping tracking s
 - Only one admin user is able to edit the resources
 - Any guest user can track a shipment using it's shipping number
 - An API for retrieving all the delivered shipments using **API_KEY**
+- The response of an external api
 
 
  ### Prerequisites
@@ -61,11 +62,15 @@ Then you can access the app in your browser
 
 By default it can be accessed using this url [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-- you track any shipment from the default page by its shipment number without login
-- you can login as admin using the email in the `DatabaseSeeder.php` file `mostafak252@gmail.com` and `password` or - - you can add your own before you run the seed command or edit it and reseed the database again
+- You can track any shipment from the default page by its shipment number without login
+- You can login as admin using the email in the `DatabaseSeeder.php` file `mostafak252@gmail.com` and `password` or - - You can add your own before you run the seed command or edit it and reseed the database again
 
 
 Once you login as admin you will be able to view, add, edit and delete any resource
+
+
+To access the external API of [https://jsonplaceholder.typicode.com/posts](https://jsonplaceholder.typicode.com/posts)
+visit `api/external-api`
 
 
 One more thing you can do is to list all the available delivered shipments and get the response as json by visiting this API: `api/delivered`

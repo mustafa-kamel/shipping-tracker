@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Http;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/delivered', [\App\Http\Controllers\Admin\ShippingController::class, 'delivered'])->name('shippings.delivered');
+
+Route::get('external-api/', function () {
+    $response = Http::get('https://jsonplaceholder.typicode.com/posts');
+    return $response->json();
+});
