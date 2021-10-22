@@ -1,65 +1,72 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## Shipment Tracking
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## About
 
-## About Laravel
+This is a basic laravel project that can be used for as a basic shipping tracking system
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### It supports:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- CRUD operations to the app resources (Products, Couriers, Shippings)
+- Only one admin user is able to edit the resources
+- Any guest user can track a shipment using it's shipping number
+- An API for retrieving all the delivered shipments using **API_KEY**
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+ ### Prerequisites
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+ You should have stable verions of all these requirements
+ - php > 7.1
+ - mysql 8.0
+ - composer 2.1
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Inatallation
 
-### Premium Partners
+To get this app up and running follow the next steps
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- First clone this repo on you machine then cd in the project directory
+```bash
+cd shipping-tracker
+```
+- Run the following command to get the app installled
+```bash
+composer update
+```
+- Create the environment file
+```bash
+copy .env.example .env
+```
 
-## Contributing
+- Create a mysql database and add its name and credentials to the `.env` file you just created in the app root directory or simply use the same name of the repo `shipping_tracker` and root as a username and password
+- After you have created a new database and added its credentials to the app config use run the app migrations
+```bash
+php artisan migrate
+```
+- Seed the database with a test data
+```bash
+php artisan db:seed
+```
+- Then run the following command to generate the app key
+```bash
+php artisan key:generate
+```
+- Once its done go ahead and start the server
+```bash
+php artisan serve
+```
+Then you can access the app in your browser
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Usage
 
-## Code of Conduct
+By default it can be accessed using this url [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+you track any shipment from the default page by its shipment number without login
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+you can login as admin using the email in the `DatabaseSeeder.php` file `mostafak252@gmail.com` and `password` or you can add your own before you run the seed command or edit it and reseed the database again
 
-## License
+Once you login as admin you will be able to view, add, edit and delete any resource
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+One more thing you can do is to list all the available delivered shipments and get the response as json by visiting this API: `api/delivered`
+if you try to do so you will get a `403 Unauthorized` response as it's secured by API_KEY, so you should use the API_KEY that's by default will be in the env file so you can add one to the `.env` file or simply use this one `api/delivered?API_KEY=WUMMUxgu52a67aBv6iN2iz8SikJeyPyESMuYtz0smzX3Mij5Ym`
