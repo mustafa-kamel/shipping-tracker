@@ -90,7 +90,7 @@ class ShippingController extends Controller
     public function delivered(Request $request)
     {
         if ($request->API_KEY !== env('API_KEY', 'WUMMUxgu52a67aBv6iN2iz8SikJeyPyESMuYtz0smzX3Mij5Ym'))
-            abort(403, 'Not authorized.');
+            abort(401);
         $shippings = Shipping::where('status', 'delivered')->get();
         return response()->json($shippings);
     }

@@ -74,4 +74,4 @@ visit `api/external-api`
 
 
 One more thing you can do is to list all the available delivered shipments and get the response as json by visiting this API: `api/delivered`
-if you try to do so you will get a `403 Unauthorized` response as it's secured by API_KEY, so you should use the API_KEY that's by default will be in the env file so you can add one to the `.env` file or simply use this one `api/delivered?API_KEY=WUMMUxgu52a67aBv6iN2iz8SikJeyPyESMuYtz0smzX3Mij5Ym`
+if you try to do so you will get a `401 Unauthorized` response as it's secured by API_KEY, so you should use the API_KEY that's by default will be in the env file so you can add one to the `.env` file or simply use this one `api/delivered?API_KEY=WUMMUxgu52a67aBv6iN2iz8SikJeyPyESMuYtz0smzX3Mij5Ym`
