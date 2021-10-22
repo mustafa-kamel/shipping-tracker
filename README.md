@@ -36,7 +36,7 @@ composer update
 ```
 - Create the environment file
 ```bash
-copy .env.example .env
+cp .env.example .env
 ```
 
 - Create a mysql database and add its name and credentials to the `.env` file you just created in the app root directory or simply use the same name of the repo `shipping_tracker` and root as a username and password
