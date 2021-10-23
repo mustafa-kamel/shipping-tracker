@@ -1,4 +1,4 @@
-## Shipment Tracking
+## Shipment Tracker
 
 ## About
 
@@ -30,7 +30,7 @@ To get this app up and running follow the next steps
 ```bash
 cd shipping-tracker
 ```
-- Run the following command to get the dependencies installled
+- Run the following command to get the dependencies installed
 ```bash
 composer update
 ```
