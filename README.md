@@ -11,7 +11,7 @@ This is a basic laravel project that can be used for a basic shipping tracking s
 - Only one admin user is able to edit the resources.
 - Any guest user can track a shipment using it's shipping number.
 - An API for retrieving all the delivered shipments using **API_KEY**.
-- The response of an external api
+- The response of an external api.
 
 
  ### Prerequisites
